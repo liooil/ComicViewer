@@ -7,8 +7,12 @@ const app = new Koa();
 
 app
     .use(async (ctx, next) => {
-        await next();
-        if (ctx.method === "GET" && ctx.path.endsWith('/')) {
+        const JSONfirst = ctx.request.header.accept.split(",")[0] === "application/json";
+        if (!JSONfirst) {
+            await next();
+            if (ctx.body !== undefined) return;
+        }
+        if (ctx.body === undefined && ctx.method === "GET" && ctx.path.endsWith('/')) {
             const staticPath = path.join(process.cwd(), decodeURI(ctx.path));
             console.log(staticPath);
             if (fs.lstatSync(staticPath).isDirectory()) {
@@ -36,6 +40,10 @@ app
                     }
                 });
             }
+        }
+        if (ctx.body !== undefined) return;
+        if (JSONfirst) {
+            await next();
         }
     })
     .use(KoaStatic("."))
