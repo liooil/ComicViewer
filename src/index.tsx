@@ -108,7 +108,6 @@ class MediaPlayer extends React.Component<{src: string, getNext(): boolean}> {
             case ".jpeg":
             default:
                 return <img src={this.props.src} onClick={this.props.getNext}/>;
-            }
         }
     }
 }
