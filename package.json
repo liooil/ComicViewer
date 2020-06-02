@@ -25,6 +25,7 @@
     "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "server": "node dist/server.js"
   }
 }

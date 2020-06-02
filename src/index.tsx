@@ -28,6 +28,7 @@ class App extends React.Component<{}, IAppState> {
                 )
             });
         })
+
     }
     public render() {
         return (
@@ -60,7 +61,6 @@ class App extends React.Component<{}, IAppState> {
                     </Button>
                 </span>}
                 cover={<MediaPlayer src={this.state.urls.join("")} getNext={() => this.getNext()} /> }
-                style={{width: "100%"}}
             />
         );
     }
