@@ -30,7 +30,6 @@ class App extends React.Component<{}, IAppState> {
         return (
             <Card
                 title={<Cascader
-                    size="large"
                     displayRender={(label) => label.join("|")}
                     autoFocus={true}
                     options={this.state.options}
@@ -40,6 +39,7 @@ class App extends React.Component<{}, IAppState> {
                         window.location.hash = "#/" + urls.join('/');
                     }}
                     allowClear={false}
+                    style={{width: "100%"}}
                 />}
                 extra={<span>
                     <Button onClick={() => {
