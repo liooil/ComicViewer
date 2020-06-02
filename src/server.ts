@@ -18,11 +18,9 @@ app
             if (fs.lstatSync(staticPath).isDirectory()) {
                 const files = fs.readdirSync(staticPath);
                 ctx.body = files.map((fn) => {
-                    if (fs.lstatSync(staticPath+fn).isDirectory()) {
-                        return { label: fn, value: encodeURI(fn) + "/", isLeaf: false};
-                    } else {
-                        return { label: fn, value: encodeURI(fn), isLeaf: true};
-                    }
+                    return { label: fn, value: encodeURI(fn),
+                        isLeaf: !fs.lstatSync(staticPath+fn).isDirectory()
+                    };
                 }).sort((a, b) => {
                     const arr = a.label.split(/(\.|_|-)/g);
                     const brr = b.label.split(/(\.|_|-)/g);
